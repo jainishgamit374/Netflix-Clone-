@@ -209,6 +209,67 @@ npm run build
 firebase deploy
 ```
 
+### Vercel Deployment
+
+#### Step 1: Install Vercel CLI
+```bash
+npm install -g vercel
+```
+
+#### Step 2: Login to Vercel
+```bash
+vercel login
+```
+This opens a browser or provides a URL with a code. After authentication, you'll see confirmation in the terminal.
+
+#### Step 3: Build Your Project (Optional)
+```bash
+npm run build
+```
+
+#### Step 4: Deploy to Vercel
+```bash
+vercel
+```
+
+During deployment, you'll be prompted to:
+1. **"Set up and deploy [your-directory]?"** → Answer: `yes`
+2. **"Which scope should contain your project?"** → Select your account/team
+3. **"Link to existing project?"** → Answer: `no` (for new projects)
+4. **"What's your project's name?"** → Enter desired name or press Enter for default
+5. **"In which directory is your code located?"** → Usually `./`
+6. **Auto-detected settings** → Vercel shows detected framework settings
+7. **"Want to modify these settings?"** → Usually `no`
+8. **"Connect repository?"** → Answer `yes` to enable auto-deployment
+
+#### Step 5: Get Your Live URL
+After deployment completes, you'll receive:
+- **Production URL**: Your live website link
+- **Inspect Dashboard**: Management interface link
+
+#### Step 6: Future Deployments
+
+```bash
+vercel --prod
+```
+
+### Alternative: Deploy via Vercel Web Interface
+
+1. Push code to GitHub/GitLab/Bitbucket
+2. Go to [vercel.com](https://vercel.com)
+3. Click "New Project"
+4. Import your repository
+5. Configure build settings (usually auto-detected)
+6. Click "Deploy"
+
+### Environment Variables on Vercel
+
+1. Go to Vercel Dashboard
+2. Select your project
+3. Navigate to Settings → Environment Variables
+4. Add your environment variables from the `.env` file
+5. Redeploy if needed
+
 ### Other Platforms
 
 ```bash
