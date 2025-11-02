@@ -14,13 +14,25 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
-// ✅ Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase safely
+let app;
+try {
+  app = initializeApp(firebaseConfig);
+} catch (e) {
+  // If config is invalid or already initialized, log and continue
+  console.error("Firebase init error:", e);
+}
 
-// (Optional) Initialize analytics — only works in browsers with measurement ID
-const analytics = getAnalytics(app);
+// Initialize analytics only in browser and when measurementId exists
+try {
+  if (typeof window !== "undefined" && firebaseConfig?.measurementId && app) {
+    getAnalytics(app);
+  }
+} catch (_) {
+  // Analytics not supported or not available — ignore in production
+}
 
-// ✅ Initialize Auth properly with app
-export const auth = getAuth();
+// Initialize Auth with the app instance
+export const auth = app ? getAuth(app) : undefined;
 
 export default app;
